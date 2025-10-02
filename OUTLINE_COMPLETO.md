@@ -1,4 +1,4 @@
-# Il Prezzo della Rivelazione - Outline Narrativo Completo
+# IL PREZZO DELLA CONOSCENZA - Outline Narrativo Completo
 
 **Durata stimata:** 25-35 minuti  
 **Passaggi totali:** 55  
@@ -16,9 +16,9 @@ Manoscritto di San Giovanni Evangelista contenente l'Apocalisse in forma non cri
 
 **Testo:**
 ```
-IL PREZZO DELLA RIVELAZIONE
+IL PREZZO DELLA CONOSCENZA
 
-Una storia interattiva ambientata nell'universo di
+Una storia interattiva nell'universo della
 CaTE 2026: I Cavalieri di Alabastro
 
 [Inizia il tuo viaggio]
@@ -270,7 +270,7 @@ Gli altri membri applaudono. Elena si avvicina con una cartella.
 
 Dario gli stringe la mano con forza.
 
-"Investirò nei tuoi progetti, fratello. Ma ti aspetto risultati."
+"Investirò nei tuoi progetti, fratello. Ma mi aspetto risultati."
 
 Fra Giovanni resta in disparte, sguardo triste.
 
@@ -445,7 +445,7 @@ Apre il libro. Pagine scritte a mano, disegni di simboli.
 
 Giovanni scuote la testa tristemente.
 
-"L'ultimo morì nel 1987. Era mio zio. Mi raccontò tutto prima di andarsene. Mi fece giurare di non cercare mai il Codex. Mi disse che chi lo cerca con intenzioni sbagliate, diventa parte della profezia oscura."
+"L'ultimo discendente morì nel 1987. Era mio zio. Mi raccontò tutto prima di andarsene. Mi fece giurare di non cercare mai il Codex. Mi disse che chi lo cerca con intenzioni sbagliate, diventa parte della profezia oscura."
 
 Marco sente il peso di quelle parole.
 

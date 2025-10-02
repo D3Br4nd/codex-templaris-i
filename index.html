@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Il Prezzo della Rivelazione - CaTE 2026</title>
+    <title>IL PREZZO DELLA CONOSCENZA - CaTE 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -395,8 +395,8 @@
     <div id="path-indicator" class="path-indicator"></div>
     
     <div id="game-container">
-        <h1 id="title">Il Prezzo della Rivelazione</h1>
-        <div class="subtitle">Una storia interattiva nell'universo di CaTE 2026: I Cavalieri di Alabastro</div>
+        <h1 id="title">IL PREZZO DELLA CONOSCENZA</h1>
+        <div class="subtitle">Una storia interattiva nell'universo della CaTE 2026: I Cavalieri di Alabastro</div>
         
         <div class="scene-indicator" id="scene-indicator"></div>
         <div class="ornament">⚜ ⚜ ⚜</div>
@@ -437,12 +437,12 @@
         // Database passaggi con info background
         const passages = {
             0: {
-                title: "Il Prezzo della Rivelazione",
+                title: "IL PREZZO DELLA CONOSCENZA",
                 scene: "Prologo",
                 background: 'default',
-                text: `IL PREZZO DELLA RIVELAZIONE
+                text: `IL PREZZO DELLA CONOSCENZA
 
-Una storia interattiva ambientata nell'universo di
+Una storia interattiva nell'universo della
 CaTE 2026: I Cavalieri di Alabastro`,
                 choices: [
                     { text: "Inizia il tuo viaggio", next: 1 }
@@ -458,9 +458,7 @@ Dentro, poche righe che hanno il potere di cambiare tutto:
 <em>"Caro Dott. Valenti,
 
 La sua tesi sui Cavalieri Templari e i loro segreti perduti non è passata inosservata. Alcuni di noi condividono la sua... curiosità per ciò che giace nascosto.
-
 La invitiamo a un incontro riservato giovedì sera, ore 21:00, Loggia Aurora, Via Santo Stefano 12.
-
 Venga solo se è pronto a cercare risposte che l'accademia non può darle.
 
 Un Fratello che cerca la Luce"</em>
@@ -700,7 +698,7 @@ Gli altri membri applaudono. Elena si avvicina con una cartella.
 
 Dario gli stringe la mano con forza.
 
-"Investirò nei tuoi progetti, fratello. Ma ti aspetto risultati."
+"Investirò nei tuoi progetti, fratello. Ma mi aspetto risultati."
 
 Fra Giovanni resta in disparte, sguardo triste.`,
                 choices: [
@@ -861,7 +859,7 @@ Apre il libro. Pagine scritte a mano, disegni di simboli.
 
 Giovanni scuote la testa tristemente.
 
-"L'ultimo morì nel 1987. Era mio zio. Mi raccontò tutto prima di andarsene. Mi fece giurare di non cercare mai il Codex. Mi disse che chi lo cerca con intenzioni sbagliate, diventa parte della profezia oscura."
+"L'ultimo discendente morì nel 1987. Era mio zio. Mi raccontò tutto prima di andarsene. Mi fece giurare di non cercare mai il Codex. Mi disse che chi lo cerca con intenzioni sbagliate, diventa parte della profezia oscura."
 
 Marco sente il peso di quelle parole.`,
                 choices: [
@@ -1452,7 +1450,7 @@ Troppo tardi.`,
                 background: 'default',
                 text: function(game) {
                     if (game.lastChoice === "heroic_ending") {
-                        return `<em>EPILOGO: IL VERO TESORO</em>\n\nMarco viene processato. Sei mesi di arresti domiciliari, poi assolto per collaborazione.\n\nLascia l'accademia. Si ritira in un monastero benedettino.\n\n10 anni dopo, prende i voti. Diventa Fra Marco.\n\nVive 40 anni nel monastero. Diventa maestro dei novizi.\n\nScrive un libro: "Il Prezzo della Rivelazione - Memorie di un Ex-Cercatore".\n\nMuore a 75 anni, in pace.\n\nLe sue ultime parole:\n\n<em>"Ho trovato ciò che cercavo. Non era nella reliquia. Era in me."</em>\n\n───────────\n\n<em>Il vero tesoro non è mai un oggetto.\nÈ la trasformazione dell'anima.\n\nMarco ha rinunciato al potere per trovare la libertà.\nHa perso tutto per guadagnare se stesso.\n\nE tu? Quale tesoro cerchi davvero?</em>`;
+                        return `<em>EPILOGO: IL VERO TESORO</em>\n\nMarco viene processato. Sei mesi di arresti domiciliari, poi assolto per collaborazione.\n\nLascia l'accademia. Si ritira in un monastero benedettino.\n\n10 anni dopo, prende i voti. Diventa Fra Marco.\n\nVive 40 anni nel monastero. Diventa maestro dei novizi.\n\nScrive un libro: "IL PREZZO DELLA CONOSCENZA - Memorie di un Ex-Cercatore".\n\nMuore a 75 anni, in pace.\n\nLe sue ultime parole:\n\n<em>"Ho trovato ciò che cercavo. Non era nella reliquia. Era in me."</em>\n\n───────────\n\n<em>Il vero tesoro non è mai un oggetto.\nÈ la trasformazione dell'anima.\n\nMarco ha rinunciato al potere per trovare la libertà.\nHa perso tutto per guadagnare se stesso.\n\nE tu? Quale tesoro cerchi davvero?</em>`;
                     } else {
                         return `<em>EPILOGO: LA FUGA IMPERFETTA</em>\n\nMarco distrugge i file ma fugge invece di confessare.\n\nVive nascosto per 12 anni. Cambia identità, si sposta continuamente.\n\nIl Codex è ritardato ma non fermato. Elena aveva altri backup.\n\nMarco muore a 38 anni in un incidente stradale.\n\nFra Giovanni, anni dopo, contatta le autorità. Testimonia. La Loggia viene smantellata.\n\nMa Marco non vede la fine.\n\n───────────\n\n<em>Marco ha fatto la cosa giusta. Ma a metà.\n\nHa rallentato il male. Ma non lo ha fermato.\n\nA volte il bene richiede sacrificio completo.\nA volte la mezza misura non basta.\n\nHa salvato la sua vita. Ma ha perso la sua pace.\n\nE tu? Avresti avuto più coraggio?</em>`;
                     }

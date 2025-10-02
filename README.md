@@ -4,7 +4,7 @@ Narrazione interattiva ambientata nell'universo di **CaTE 2026: I Cavalieri di A
 
 ## 📖 Storia
 
-*Il Prezzo della Rivelazione* segue Marco Valenti, ricercatore di storia medievale, nel suo viaggio attraverso i segreti della Loggia Lumen Mentis e la ricerca del Codex Veteris Lucis - un manoscritto perduto di San Giovanni Evangelista contenente l'Apocalisse in forma non criptata.
+*IL PREZZO DELLA CONOSCENZA* segue Marco Valenti, ricercatore di storia medievale, nel suo viaggio attraverso i segreti della Loggia Lumen Mentis e la ricerca del Codex Veteris Lucis - un manoscritto perduto di San Giovanni Evangelista contenente l'Apocalisse in forma non criptata.
 
 ## 🎮 Caratteristiche
 
