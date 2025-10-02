@@ -1,0 +1,14 @@
+services:
+  codex-templaris:
+    build: .
+    container_name: codex-templaris-interactive
+    networks:
+      - plv_network
+    restart: unless-stopped
+    labels:
+      - "app=codex-templaris"
+      - "description=Narrazione interattiva CaTE 2026"
+
+networks:
+  plv_network:
+    external: true
