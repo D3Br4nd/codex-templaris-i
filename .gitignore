@@ -1,7 +1,3 @@
-# Build output
-dist/
-*.html
-
 # Node modules
 node_modules/
 package-lock.json

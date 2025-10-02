@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il Prezzo della Rivelazione - CaTE 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --parchment: #F4E8D0;
+            --ink: #2C1810;
+            --seal-red: #8B1A1A;
+            --gold: #D4AF37;
+            --shadow: rgba(44, 24, 16, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background: 
+                linear-gradient(135deg, rgba(62, 39, 35, 0.8) 0%, rgba(93, 64, 55, 0.8) 100%),
+                url('assets/images/bg_pergamena.jpg') center/cover;
+            background-attachment: fixed;
+            color: var(--ink);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        #game-container {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            width: 100%;
+            background: var(--parchment);
+            border: 3px solid var(--ink);
+            border-radius: 8px;
+            box-shadow: 
+                0 0 0 8px var(--gold),
+                0 0 0 11px var(--ink),
+                0 20px 60px var(--shadow);
+            padding: 40px;
+            position: relative;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        #game-container::before {
+            content: '✠';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 30px;
+            color: var(--seal-red);
+            background: var(--parchment);
+            padding: 0 15px;
+            font-weight: bold;
+        }
+
+        #game-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(139, 26, 26, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            border-radius: 6px;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5em;
+            text-align: center;
+            color: var(--seal-red);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px var(--shadow);
+        }
+
+        .subtitle {
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            font-size: 1.1em;
+            color: var(--ink);
+            margin-bottom: 30px;
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        #story-text {
+            font-size: 1.15em;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            text-align: justify;
+            white-space: pre-line;
+        }
+
+        #story-text em {
+            font-style: italic;
+            color: var(--seal-red);
+        }
+
+        #choices {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .choice-btn {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.1em;
+            padding: 18px 25px;
+            background: linear-gradient(135deg, #fdf8f0 0%, var(--parchment) 100%);
+            border: 2px solid var(--ink);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .choice-btn::before {
+            content: '→';
+            position: absolute;
+            left: 10px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            color: var(--seal-red);
+            font-weight: bold;
+        }
+
+        .choice-btn:hover {
+            background: linear-gradient(135deg, var(--gold) 0%, #c9a962 100%);
+            border-color: var(--seal-red);
+            transform: translateX(5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+            padding-left: 35px;
+        }
+
+        .choice-btn:hover::before {
+            opacity: 1;
+            left: 15px;
+        }
+
+        .choice-btn:active {
+            transform: translateX(5px) scale(0.98);
+        }
+
+        .continue-btn {
+            font-family: 'Cinzel', serif;
+            font-size: 1em;
+            padding: 15px 30px;
+            background: var(--seal-red);
+            color: var(--parchment);
+            border: 2px solid var(--ink);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            display: block;
+            margin: 0 auto;
+        }
+
+        .continue-btn:hover {
+            background: #a61616;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        .continue-btn:active {
+            transform: translateY(0);
+        }
+
+        #progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(44, 24, 16, 0.2);
+            border-radius: 4px;
+            margin-top: 30px;
+            overflow: hidden;
+            border: 1px solid var(--ink);
+        }
+
+        #progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--seal-red) 0%, var(--gold) 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(139, 26, 26, 0.5);
+        }
+
+        .scene-indicator {
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            font-size: 0.9em;
+            color: var(--seal-red);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+
+        .ornament {
+            text-align: center;
+            font-size: 1.5em;
+            color: var(--gold);
+            margin: 20px 0;
+            opacity: 0.6;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            #game-container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
+
+            #story-text {
+                font-size: 1.05em;
+            }
+
+            .choice-btn {
+                font-size: 1em;
+                padding: 15px 20px;
+            }
+        }
+
+        .checkpoint-notice {
+            background: rgba(139, 26, 26, 0.1);
+            border: 2px solid var(--seal-red);
+            border-radius: 4px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 0.95em;
+            color: var(--seal-red);
+        }
+
+        .path-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(44, 24, 16, 0.9);
+            color: var(--parchment);
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.9em;
+            z-index: 1000;
+            border: 2px solid var(--gold);
+            display: none;
+        }
+
+        .path-indicator.active {
+            display: block;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        #audio-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--seal-red);
+            color: var(--parchment);
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.2em;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #audio-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(139, 26, 26, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div id="path-indicator" class="path-indicator"></div>
+    
+    <div id="game-container">
+        <h1 id="title">Il Prezzo della Rivelazione</h1>
+        <div class="subtitle">Una storia interattiva nell'universo di CaTE 2026: I Cavalieri di Alabastro</div>
+        
+        <div class="scene-indicator" id="scene-indicator"></div>
+        <div class="ornament">⚜ ⚜ ⚜</div>
+        
+        <div id="story-text"></div>
+        
+        <div id="choices"></div>
+        
+        <div id="progress-bar">
+            <div id="progress-fill"></div>
+        </div>
+    </div>
+
+    <button id="audio-toggle" title="Toggle Audio">🔇</button>
+
+    <script>
+        // Sistema di gioco
+        const game = {
+            currentPassage: 0,
+            stats: {
+                integrità: 0,
+                ambizione: 0,
+                lealtà: 0
+            },
+            totalPassages: 55,
+            pathActivated: null
+        };
+
+        // Database passaggi
+        const passages = {
+            0: {
+                title: "Il Prezzo della Rivelazione",
+                scene: "Prologo",
+                text: `IL PREZZO DELLA RIVELAZIONE
+
+Una storia interattiva ambientata nell'universo di
+CaTE 2026: I Cavalieri di Alabastro`,
+                choices: [
+                    { text: "Inizia il tuo viaggio", next: 1 }
+                ]
+            },
+            1: {
+                scene: "Bologna, autunno 2015",
+                text: `Marco Valenti, 28 anni, ricercatore di storia medievale all'Università di Bologna, fissa la busta sulla sua scrivania. La ceralacca rossa con un simbolo esoterico ancora intatta.
+
+Dentro, poche righe che hanno il potere di cambiare tutto:
+
+<em>"Caro Dott. Valenti,
+
+La sua tesi sui Cavalieri Templari e i loro segreti perduti non è passata inosservata. Alcuni di noi condividono la sua... curiosità per ciò che giace nascosto.
+
+La invitiamo a un incontro riservato giovedì sera, ore 21:00, Loggia Aurora, Via Santo Stefano 12.
+
+Venga solo se è pronto a cercare risposte che l'accademia non può darle.
+
+Un Fratello che cerca la Luce"</em>
+
+Marco sa che dovrebbe essere scettico. Eppure, dopo anni passati a studiare codici cifrati e manoscritti proibiti, una parte di lui ha sempre sperato che quei segreti fossero reali.`,
+                choices: [
+                    { 
+                        text: "Accetto. La curiosità mi divora da troppo tempo.", 
+                        next: 2, 
+                        stats: { ambizione: 2, lealtà: 1 },
+                        flag: "accept_eager"
+                    },
+                    { 
+                        text: "Sono scettico, ma l'opportunità è troppo unica per rifiutare.", 
+                        next: 2, 
+                        stats: { integrità: 1, ambizione: 1 },
+                        flag: "accept_skeptic"
+                    },
+                    { 
+                        text: "Probabilmente è una bufala, ma che male c'è ad andare a vedere?", 
+                        next: 2,
+                        flag: "accept_casual"
+                    }
+                ]
+            },
+            2: {
+                scene: "Strada di Bologna, sera",
+                text: function(game) {
+                    if (game.lastChoice === "accept_eager") {
+                        return `Marco cammina per le vie notturne di Bologna con passo deciso. Ha aspettato questo momento per tutta la vita. L'accademia lo ha sempre limitato, con le sue peer review e le sue "metodologie scientifiche". Stasera potrebbe finalmente accedere a una conoscenza che va oltre i libri polverosi.`;
+                    } else if (game.lastChoice === "accept_skeptic") {
+                        return `Marco procede con cautela, ma l'eccitazione è palpabile. Ha imparato a bilanciare scetticismo e curiosità. Potrebbe essere una setta di eccentrici, o potrebbe essere qualcosa di più. Solo un modo per scoprirlo.`;
+                    } else {
+                        return `Marco quasi si pente di essere uscito di casa. Probabilmente un gruppo di appassionati di Dan Brown che si riuniscono per sentirsi speciali. Ma è una serata libera, in fondo. E chi lo sa.`;
+                    }
+                },
+                choices: [
+                    { text: "Continua", next: 3 }
+                ]
+            },
+            3: {
+                scene: "Esterno Loggia Aurora",
+                text: `Via Santo Stefano 12. Un palazzo rinascimentale, apparentemente anonimo tra tanti altri. Ma quando Marco si avvicina al portone, nota i dettagli: gli stemmi sopra l'architrave, usurati ma inequivocabili. Simboli che ha visto solo nei manoscritti.
+
+Il portone si apre prima che bussi. Un uomo sulla cinquantina, abito scuro impeccabile, sorride gentile.
+
+"Dott. Valenti. Siamo lieti che abbia accettato. Prego, si accomodi. Il Maestro Venerabile la sta aspettando."`,
+                choices: [
+                    { text: "Entra", next: 4 }
+                ]
+            },
+            4: {
+                scene: "Interno della Loggia",
+                text: `Dentro, il mondo esterno svanisce. Legno scuro, candelabri a muro, pavimenti che scricchiolano sotto secoli di storia. Quadri alle pareti: compasso, squadra, l'occhio che tutto vede.
+
+Marco viene guidato attraverso un corridoio, poi una scala, infine una porta a due battenti.
+
+"Il Maestro la riceverà nella biblioteca. Entri pure."
+
+La porta si apre su una sala ottagonale. Scaffali che toccano il soffitto, pieni di volumi rilegati in pelle. Al centro, un tavolo di noce massiccio. E seduto dietro, un uomo dai capelli grigi perfettamente pettinati, un pizzetto curato, occhi che sembrano vedere attraverso di te.
+
+"Buonasera, Marco. Io sono Sergio Altieri."`,
+                choices: [
+                    { text: "Continua", next: 5 }
+                ]
+            },
+            5: {
+                scene: "Biblioteca - Primo dialogo",
+                text: `Altieri gesticola verso una poltrona. Marco siede, incerto.
+
+"La ringrazio per essere venuto," inizia Altieri, versando due bicchieri di un liquido ambrato. "Whisky scozzese. Lo preferisco al vino, troppo associato a cerimonie religiose stantie."
+
+Un sorriso ambiguo.
+
+"Lei ha dedicato la sua tesi di dottorato a 'I Codici Perduti dei Templari: Mito o Realtà Storica'. Un lavoro eccellente, devo dire. Anche se i suoi professori l'hanno costretto a stemperare le conclusioni, vero?"
+
+Marco annuisce, sorpreso che Altieri conosca questi dettagli.
+
+"La storia che ci insegnano," continua Altieri con voce magnetica, "è una menzogna sterilizzata, Marco. I veri segreti sono custoditi da chi sa guardare oltre."
+
+Fa una pausa, gli occhi fissi su Marco.
+
+"Lei ha il talento. La domanda è: ha il coraggio?"`,
+                choices: [
+                    { text: "Continua", next: 6 }
+                ]
+            },
+            6: {
+                scene: "Presentazioni",
+                text: `Nei giorni seguenti, Marco viene introdotto agli altri membri della Loggia:
+
+<em>Elena Caruso</em> (45 anni, neurologa). Fredda come il bisturi. Quando parla, usa termini scientifici come armi. "Il cervello umano è solo un computer biologico, Marco. Chi ne comprende il codice sorgente, ne ha il controllo."
+
+<em>Dario Monti</em> (38 anni, imprenditore). Pragmatico, cinico. "La verità è semplice: chi ha conoscenza ha potere. Chi ha potere ha ricchezza. Io investo in entrambi."
+
+<em>Fra Giovanni</em> (70 anni, ex monaco). Il più anziano, l'unico che sembra portare ancora un fardello di coscienza. "Benvenuto, figliolo. Spero che questa strada ti porti pace, non tormento."
+
+Altieri aggiunge: "Ognuno di noi ha un ruolo. Ognuno contribuisce alla nostra <em>Grande Opera</em>."`,
+                choices: [
+                    { 
+                        text: "Sono affascinato da Elena. La scienza applicata ai misteri antichi.", 
+                        next: 7, 
+                        stats: { ambizione: 1 } 
+                    },
+                    { 
+                        text: "Dario ha ragione. Conoscenza senza applicazione è inutile.", 
+                        next: 7, 
+                        stats: { ambizione: 2, integrità: -1 } 
+                    },
+                    { 
+                        text: "Fra Giovanni mi incuriosisce. Cos'è che lo tormenta?", 
+                        next: 7, 
+                        stats: { integrità: 2 } 
+                    }
+                ]
+            },
+            7: {
+                scene: "Biblioteca Segreta",
+                text: `Fra Giovanni conduce Marco in una sezione ancora più riservata della biblioteca. Manoscritti in lingue morte, sigillati con cera.
+
+"Questi testi," sussurra Giovanni, "non sono nei cataloghi ufficiali del Vaticano. Qualcuno li ha sottratti durante la soppressione degli ordini monastici. Noi li preserviamo."
+
+Apre un codice del II secolo. Pagine di pergamena consumata, inchiostro sbiadito ma leggibile.
+
+"<em>Codex Veteris Lucis</em>," legge Giovanni con reverenza. "Il Codice dell'Antica Luce. Secondo la tradizione, San Giovanni Evangelista scrisse due versioni dell'Apocalisse. Quella nella Bibbia è criptata con simboli. Questa... questa è la versione chiara."
+
+Marco sente un brivido. "Chiara in che senso?"
+
+"Nomi reali. Date precise. Eventi specifici. Giovanni la scrisse per i suoi discepoli più fidati, poi la Chiesa gli ordinò di distruggerla. Lui fece finta di obbedire."
+
+"Esiste ancora?"
+
+Giovanni chiude il libro lentamente. "Alcuni di noi lo cercano."`,
+                choices: [
+                    { text: "Continua", next: 8 }
+                ]
+            },
+            8: {
+                scene: "Test di ammissione",
+                text: `Una settimana dopo, Altieri convoca Marco per un "colloquio di ammissione".
+
+"Prima di procedere oltre, dobbiamo capire quanto sei preparato. Dimmi, Marco: perché i Templari furono davvero soppressi nel 1307?"`,
+                choices: [
+                    { 
+                        text: "Erano troppo ricchi e potenti. Filippo il Bello li voleva eliminare per motivi politici ed economici.", 
+                        next: 9, 
+                        stats: { integrità: -1 },
+                        flag: "answer_academic"
+                    },
+                    { 
+                        text: "Custodivano qualcosa che la Chiesa temeva. Non solo ricchezze materiali, ma conoscenza proibita.", 
+                        next: 9, 
+                        stats: { ambizione: 2, integrità: 1 },
+                        flag: "answer_forbidden"
+                    },
+                    { 
+                        text: "Le fonti sono contraddittorie. Probabilmente un mix di fattori economici, politici e religiosi.", 
+                        next: 9, 
+                        stats: { integrità: 2, ambizione: -1 },
+                        flag: "answer_cautious"
+                    }
+                ]
+            },
+            9: {
+                scene: "Reazione di Altieri",
+                text: function(game) {
+                    if (game.lastChoice === "answer_academic") {
+                        return `Altieri sembra deluso. "Quella è la versione per turisti, Marco. Speravo di più da te."\n\n"Sei pronto per l'iniziazione?"`;
+                    } else if (game.lastChoice === "answer_forbidden") {
+                        return `Altieri sorride apertamente. "Esattamente. I Templari avevano scoperto qualcosa in Terra Santa. Qualcosa che avrebbe distrutto il monopolio della Chiesa sulla 'verità'. Bene, Marco. Molto bene."\n\n"Sei pronto per l'iniziazione?"`;
+                    } else {
+                        return `Altieri annuisce pensieroso. "Prudente. Apprezzo lo scetticismo metodico. Ma qui dovrai imparare a fare salti logici, non solo passi misurati."\n\n"Sei pronto per l'iniziazione?"`;
+                    }
+                },
+                choices: [
+                    { text: "Sì", next: 10 }
+                ]
+            },
+            10: {
+                scene: "Cerimonia di iniziazione - Parte 1",
+                text: `La sala ottagonale. Pavimento a scacchi bianco e nero. Altare centrale con simboli che Marco riconosce: compasso, squadra, il Libro della Legge.
+
+I membri della Loggia sono presenti, vestiti con grembiuli rituali. Altieri guida la cerimonia.
+
+"Marco Valenti, bussate tre volte alla porta dell'ignoranza e chiedete di essere ammesso alla Luce."
+
+Marco esegue. La porta si apre.
+
+"Entrate bendato, poiché chi cerca la Luce deve prima attraversare le tenebre."`,
+                choices: [
+                    { text: "Continua", next: 11 }
+                ]
+            },
+            11: {
+                scene: "Il Giuramento",
+                text: `La benda viene tolta. Marco è circondato. Altieri tiene una spada cerimoniale puntata al suo petto.
+
+"Giurate, Marco Valenti, di custodire i segreti della Loggia. Di non rivelare mai, con parola o azione, ciò che vedrete e sentirete in questo luogo sacro. Giurate sulla vostra vita, sulla vostra anima."`,
+                choices: [
+                    { 
+                        text: "Giuro con tutto me stesso. Finalmente appartengo a qualcosa di più grande.", 
+                        next: 12, 
+                        stats: { lealtà: 2, ambizione: 1 } 
+                    },
+                    { 
+                        text: "Giuro, ma mentalmente mi riservo il diritto di valutare ogni cosa con la mia coscienza.", 
+                        next: 12, 
+                        stats: { integrità: 2, lealtà: -1 } 
+                    },
+                    { 
+                        text: "Giuro. Le parole sono parole, contano i fatti.", 
+                        next: 12, 
+                        stats: { ambizione: 1 } 
+                    }
+                ]
+            },
+            12: {
+                scene: "Benvenuto, Fratello",
+                text: `La spada viene abbassata. Altieri sorride.
+
+"Benvenuto, Fratello Marco. Ora fai parte della Loggia Lumen Mentis. <em>La Luce della Mente</em>. Insieme, porteremo l'umanità a un nuovo livello di consapevolezza."
+
+Gli altri membri applaudono. Elena si avvicina con una cartella.
+
+"Ecco i tuoi primi compiti, Marco. Hai accesso alla nostra rete di ricerca. Banche dati, archivi sigillati, contatti internazionali. Benvenuto nel mondo reale."
+
+Dario gli stringe la mano con forza.
+
+"Investirò nei tuoi progetti, fratello. Ma ti aspetto risultati."
+
+Fra Giovanni resta in disparte, sguardo triste.`,
+                choices: [
+                    { text: "Continua", next: 13 }
+                ]
+            },
+            13: {
+                scene: "Prime settimane nella Loggia",
+                text: `Le settimane successive sono un turbine.
+
+Marco accede a risorse che non aveva mai sognato: satelliti per rilievi archeologici, laboratori privati per datazioni, traduzioni immediate di testi in aramaico.
+
+Collabora con Elena su ricerche che sfumano il confine tra neurologia e... qualcos'altro.
+
+Dario gli offre finanziamenti generosi per ricerche "non convenzionali".
+
+Ma qualcosa lo inquieta. Le domande della Loggia sono sempre più specifiche. Non cercano solo <em>conoscenza</em>. Cercano qualcosa di concreto.`,
+                choices: [
+                    { text: "Continua", next: 14 }
+                ]
+            },
+            14: {
+                scene: "Fine Atto I - La Scoperta",
+                text: `Una sera, mentre esamina un dossier nella biblioteca, Marco trova una nota scritta a mano, nascosta tra le pagine:
+
+<em>"Progetto Eschaton - Autorizzazione Fase 2. Obiettivo: Codex Veteris Lucis. Localizzazione stimata: Monastero di Patmos, Grecia."</em>
+
+Sotto, una firma: Elena Caruso.
+
+Il sangue di Marco si ghiaccia.
+
+Stanno cercando il Codex di San Giovanni. Non per studiarlo. Per <em>usarlo</em>.`,
+                choices: [
+                    { text: "Fine Atto I - Continua", next: 15 }
+                ],
+                checkpoint: true
+            },
+            15: {
+                scene: "Notte insonne",
+                text: `Marco non dorme. Fissa il soffitto.
+
+<em>Progetto Eschaton.</em> La Fine dei Tempi.
+
+Non è un progetto di ricerca accademica. È qualcosa di più oscuro.
+
+Ripensa alle parole di Altieri: <em>"guidare l'umanità verso il suo destino"</em>.
+
+Chi decide quale sia questo destino?
+
+Potrebbe andarsene. Sparire. Ma sa troppo. E una parte di lui vuole ancora sapere.`,
+                choices: [
+                    { text: "Continua", next: 16 }
+                ]
+            },
+            16: {
+                scene: "Riunione del Progetto",
+                text: `La settimana dopo, Marco viene convocato per una presentazione speciale. Altieri, Elena e Dario sono presenti.
+
+Elena proietta immagini su uno schermo: mappe di Patmos, foto satellitari di un monastero isolato, documenti antichi.
+
+"Il Codex Veteris Lucis," inizia Elena con tono clinico, "non è solo un manoscritto storico. È una mappa del futuro. San Giovanni scrisse l'Apocalisse due volte: una versione simbolica per il pubblico, e una versione letterale per i suoi successori."
+
+Fa una pausa drammatica.
+
+"La versione letterale contiene nomi reali, date precise, eventi specifici. Chi la possiede può prevedere—no, <em>costruire</em>—il futuro."`,
+                choices: [
+                    { text: "Continua", next: 17 }
+                ]
+            },
+            17: {
+                scene: "Il Piano viene svelato",
+                text: `Altieri prende la parola, voce magnifica.
+
+"Fratelli, immaginate un mondo dove possiamo prevenire catastrofi, identificare pericoli prima che emergano, guidare l'umanità verso un futuro di pace."
+
+Fa scorrere diapositive con grafici, timeline, analisi geopolitiche.
+
+"Il Codex contiene profezie verificabili. Abbiamo confrontato frammenti di copie parziali con eventi storici. L'accuratezza è del 97%. Giovanni aveva davvero visto il futuro."
+
+Dario si sporge in avanti, eccitato.
+
+"E la parte più importante: il Codex identifica l'Anticristo. Nome, luogo di nascita, percorso al potere. Possiamo fermarlo prima che inizi."
+
+Marco sente un brivido gelido.`,
+                choices: [
+                    { 
+                        text: "È incredibile. Potremmo davvero salvare il mondo.", 
+                        next: 18, 
+                        stats: { ambizione: 2, integrità: -1 } 
+                    },
+                    { 
+                        text: "Chi siamo noi per manipolare il piano divino? Questo è pericoloso.", 
+                        next: 18, 
+                        stats: { integrità: 3, lealtà: -2 } 
+                    },
+                    { 
+                        text: "Serve più ricerca. Non possiamo agire su informazioni incomplete.", 
+                        next: 18, 
+                        stats: { integrità: 1 } 
+                    }
+                ]
+            },
+            18: {
+                scene: "Reazione della Loggia",
+                text: function(game) {
+                    if (game.stats.ambizione > game.stats.integrità) {
+                        return `Altieri sorride soddisfatto. "Sapevo di non sbagliarmi su di te, Marco. Avrai un ruolo chiave nella spedizione a Patmos."`;
+                    } else if (game.stats.integrità > game.stats.lealtà + 3) {
+                        return `Silenzio imbarazzante. Elena lo guarda con freddezza. Altieri si fa serio. "Capisco le tue riserve, Marco. Ma ricorda il tuo giuramento. Ciò che discutiamo qui non esce da questa stanza."`;
+                    } else {
+                        return `Altieri annuisce diplomatico. "Certo, Marco. La scienza richiede rigore. Per questo ti vogliamo con noi a Patmos. Per verificare l'autenticità."\n\nMa Marco sente che le loro decisioni sono già prese.`;
+                    }
+                },
+                choices: [
+                    { text: "Continua", next: 19 }
+                ]
+            },
+            19: {
+                scene: "Confessione di Fra Giovanni",
+                text: `Marco trova Fra Giovanni nella biblioteca, visibilmente turbato. Il vecchio monaco sta leggendo un testo antico, le mani tremanti.
+
+"Figliolo, posso parlarti in privato?"
+
+Si siedono lontano dalle orecchie indiscrete. Giovanni chiude il libro che stava leggendo.
+
+"Sono entrato nella Loggia cinquant'anni fa, credendo fosse una ricerca spirituale. Ma Elena... Altieri... hanno perso la via. Il Codex non è uno strumento, Marco. È un test."
+
+Fa una pausa, occhi lucidi.
+
+"San Giovanni era l'apostolo che Gesù amava. L'ultimo testimone vivente. Quando scrisse l'Apocalisse, era già vecchio, esiliato a Patmos. La Chiesa primitiva temeva che scrivesse troppo chiaramente, che nominasse imperatori romani, che causasse persecuzioni."
+
+"E quindi?"
+
+"Quindi Giovanni scrisse due versioni. Una pubblica, criptata. E una privata, chiara. Ma la versione chiara non era per <em>usarla</em>. Era per <em>testarci</em>. Per vedere chi avrebbe cercato di controllare il futuro invece di avere fede."`,
+                choices: [
+                    { text: "Continua", next: 20 }
+                ]
+            },
+            20: {
+                scene: "I Cavalieri di Alabastro",
+                text: `Giovanni si alza, va verso uno scaffale nascosto, estrae un piccolo libro rilegato in pelle usurata.
+
+"Nel 1291, quando Acri cadde e i Templari furono dispersi, un piccolo gruppo di cavalieri non ufficiali salvò alcune reliquie. Non erano guerrieri. Erano scribi, custodi, copisti. Si chiamavano <em>Cavalieri di Alabastro</em>."
+
+Apre il libro. Pagine scritte a mano, disegni di simboli.
+
+"Loro custodivano il Codex. Lo nascosero a Patmos, nel monastero originale dove Giovanni l'aveva scritto. Hanno protetto quel segreto per 700 anni. Fino a quando la Loggia ne ha scoperto l'esistenza."
+
+"Sono ancora vivi? I Cavalieri?"
+
+Giovanni scuote la testa tristemente.
+
+"L'ultimo morì nel 1987. Era mio zio. Mi raccontò tutto prima di andarsene. Mi fece giurare di non cercare mai il Codex. Mi disse che chi lo cerca con intenzioni sbagliate, diventa parte della profezia oscura."
+
+Marco sente il peso di quelle parole.`,
+                choices: [
+                    { text: "Continua", next: 21 }
+                ]
+            },
+            21: {
+                scene: "L'avvertimento",
+                text: `"Marco," dice Giovanni con voce rotta, "se vai a Patmos con loro, se li aiuti a trovare il Codex, non sarai più tu. Diventerai uno strumento del Male che credono di combattere."
+
+"Ma se non vado, lo troveranno comunque. Almeno io posso... non lo so, sabotarli dall'interno?"
+
+Giovanni lo guarda con intensità.
+
+"C'è solo un modo per fermarli davvero, figliolo. Ma richiede sacrificio. Richiede che tu tradisca il tuo giuramento alla Loggia. Richiede che tu scelga Dio sopra ogni altra lealtà."
+
+"Cosa devo fare?"
+
+"Per ora, vai con loro. Osserva. Impara. E quando arriverà il momento, avrai una scelta da fare. Una scelta che definirà la tua anima."`,
+                choices: [
+                    { 
+                        text: "Farò ciò che è giusto, qualunque sia il prezzo.", 
+                        next: 22, 
+                        stats: { integrità: 3, lealtà: -1 } 
+                    },
+                    { 
+                        text: "Cercherò di trovare una via di mezzo, un compromesso.", 
+                        next: 22, 
+                        stats: { integrità: 1 } 
+                    },
+                    { 
+                        text: "Forse la Loggia ha ragione. Forse possiamo usare il Codex per il bene.", 
+                        next: 22, 
+                        stats: { ambizione: 2, lealtà: 1, integrità: -2 } 
+                    }
+                ]
+            },
+            22: {
+                scene: "Preparativi per Patmos",
+                text: `Le settimane successive sono febbrili. La Loggia organizza la spedizione con precisione militare.
+
+Elena coordina la logistica: permessi falsificati per accedere al monastero, attrezzature di scansione nascoste in valigie diplomatiche.
+
+Dario finanzia tutto senza battere ciglio. "Questo investimento ripagherà mille volte," dice.
+
+Marco viene istruito sul suo ruolo: dovrà guadagnarsi la fiducia dei monaci con la sua competenza accademica, poi facilitare l'accesso alle aree riservate.
+
+La sera prima della partenza, Marco riceve un messaggio da Fra Giovanni:
+
+<em>"Ricorda, figliolo: la verità vi farà liberi. Ma quale verità stai cercando?"</em>`,
+                choices: [
+                    { text: "Continua", next: 23 }
+                ]
+            },
+            23: {
+                scene: "Arrivo a Patmos",
+                text: `L'aereo atterra sull'isola al tramonto. Patmos è arida, rocciosa, battuta dal vento. Il monastero domina dall'alto, una fortezza bianca e imponente.
+
+Il gruppo è piccolo: Marco, Elena, Dario, e due "assistenti" che sono chiaramente guardie del corpo.
+
+Il padre superiore, un monaco greco anziano di nome Padre Nikodimos, li accoglie con cortesia formale.
+
+"Benvenuti, studiosi. Il nostro monastero è lieto di aprire le porte alla ricerca accademica. Però vi chiediamo rispetto: questo è un luogo sacro."
+
+Elena sorride professionalmente. "Certamente, Padre. Siamo qui solo per documentare manoscritti per il nostro archivio universitario."
+
+Marco sente il peso della menzogna.`,
+                choices: [
+                    { text: "Continua", next: 24 }
+                ]
+            },
+            24: {
+                scene: "Biblioteca del Monastero",
+                text: `La biblioteca del monastero è un tesoro. Centinaia di codici antichi, alcuni risalenti ai primi secoli cristiani.
+
+Marco lavora insieme a Elena, esaminando cataloghi, confrontando descrizioni.
+
+"Il Codex non sarà catalogato," sussurra Elena. "Giovanni lo nascose deliberatamente. Dobbiamo cercare spazi nascosti, camere segrete."
+
+Usa uno scanner a penetrazione che sembra un normalissimo laptop. Scansiona pareti, pavimenti.
+
+Padre Nikodimos passa occasionalmente, sorridendo. Ma i suoi occhi sono vigili.
+
+Marco si sente osservato. E colpevole.`,
+                choices: [
+                    { text: "Continua", next: 25 }
+                ]
+            },
+            25: {
+                scene: "Il primo indizio",
+                text: `Marco trova qualcosa. In un catalogo del XV secolo, una nota criptata in margine:
+
+<em>"Ubi Aquila requiescit, ibi Lux Vetera dormit."</em>
+"Dove l'Aquila riposa, là l'Antica Luce dorme."
+
+L'Aquila è il simbolo di Giovanni Evangelista. E "Lux Vetera" potrebbe essere "Veteris Lucis"—il Codex.
+
+Mostra la scoperta a Elena, che si illumina.
+
+"Dov'è la cappella dedicata a Giovanni?"
+
+"Nella cripta," risponde Marco. "Ma è un'area riservata ai monaci."
+
+"Allora dovremo entrarci di notte."`,
+                choices: [
+                    { 
+                        text: "D'accordo. Siamo venuti fin qui per questo.", 
+                        next: 26, 
+                        stats: { ambizione: 2, lealtà: 1 } 
+                    },
+                    { 
+                        text: "Non mi sembra giusto profanare un luogo sacro così.", 
+                        next: 26, 
+                        stats: { integrità: 2, lealtà: -1 } 
+                    },
+                    { 
+                        text: "Proviamo prima a chiedere il permesso ufficiale.", 
+                        next: 26, 
+                        stats: { integrità: 1 } 
+                    }
+                ]
+            },
+            26: {
+                scene: "Incursione notturna",
+                text: `Marco ed Elena scivolano per i corridoi bui. Le "guardie" di Dario fanno da palo.
+
+La cripta è umida, fredda. Lampade a olio proiettano ombre danzanti. Al centro, una statua di San Giovanni con un'aquila ai piedi.
+
+Elena usa lo scanner. "Cavità dietro la statua. Due metri per uno e mezzo."
+
+Marco esita. "Dobbiamo spostare la statua? È un sacrilegio."
+
+"È archeologia," replica Elena gelida.
+
+Dietro la statua, una nicchia nascosta. E dentro, avvolto in seta consumata, un codice di pergamena. La copertina di cuoio porta inciso un simbolo: un'aquila con un libro.
+
+<em>Codex Veteris Lucis.</em>`,
+                choices: [
+                    { text: "Continua", next: 27 }
+                ]
+            },
+            27: {
+                scene: "Il furto",
+                text: `Elena fotografa freneticamente ogni pagina con una fotocamera ad alta risoluzione. Marco osserva le parole in greco antico scorrere sullo schermo.
+
+Non sono simboli. Sono nomi. Date. Luoghi.
+
+"<em>Anno 1347: pestis magna Europam devastabit, tertiam partem hominum consumens.</em>"
+"Anno 1347: una grande peste devasterà l'Europa, consumando un terzo degli uomini."
+
+La Peste Nera. Giovanni l'aveva prevista con 1200 anni di anticipo.
+
+"<em>Anno 1492: vir Ianuensis terras novas inveniet ultra Oceanum.</em>"
+"Anno 1492: un uomo genovese troverà nuove terre oltre l'Oceano."
+
+Cristoforo Colombo.
+
+"<em>Anno 1914: quattuor imperia corruent in bello magno.</em>"
+"Anno 1914: quattro imperi cadranno in una grande guerra."
+
+La Prima Guerra Mondiale.
+
+Marco sente la stanza girare. È tutto vero.`,
+                choices: [
+                    { text: "Continua", next: 28 }
+                ]
+            },
+            28: {
+                scene: "La sezione futura",
+                text: `Elena scorre verso le pagine finali. Quelle che parlano del futuro.
+
+Marco legge, sempre più agghiacciato:
+
+"<em>Anno 2027: bella aquarum in Oriente. Natio australis insurgit.</em>"
+"Anno 2027: guerre d'acqua in Oriente. Una nazione del sud insorge."
+
+"<em>Anno 2031: pestis nova, ex manu hominum creata.</em>"
+"Anno 2031: una nuova peste, creata dalla mano dell'uomo."
+
+E poi, una sezione separata, scritta con inchiostro più scuro:
+
+<em>DE ANTICHRISTO</em>
+<em>SULL'ANTICRISTO</em>
+
+Elena trema mentre fotografa. Marco si sente male.
+
+Ci sono nomi. Luoghi di nascita. Percorsi politici. Come se Giovanni avesse visto l'intera vita di questa persona.
+
+"Dobbiamo andarcene," dice Elena. "Prima che i monaci si sveglino."`,
+                choices: [
+                    { text: "Continua", next: 29 }
+                ]
+            },
+            29: {
+                scene: "Fuga da Patmos",
+                text: `Partono all'alba. Il Codex originale resta nel monastero—impossibile rubarlo senza causare un incidente internazionale. Ma Elena ha le fotografie. Ogni pagina. Ogni parola.
+
+Padre Nikodimos li saluta all'uscita. Il suo sguardo si sofferma su Marco.
+
+"Spero abbiate trovato ciò che cercavate, figlioli. Ma ricordate: non tutta la conoscenza porta alla luce. Alcune verità sono tenebre mascherate."
+
+Marco non riesce a sostenere il suo sguardo.
+
+Sull'aereo per Bologna, Elena lavora già a traduzioni e analisi. Dario pianifica "applicazioni commerciali". Altieri, via telefono, è euforico.
+
+Marco guarda dal finestrino il mare blu sotto di loro. E si chiede se ha appena commesso il peccato più grande della sua vita.`,
+                choices: [
+                    { text: "Fine Atto II - Continua", next: 30 }
+                ],
+                checkpoint: true
+            },
+            30: {
+                scene: "Ritorno a Bologna - Riunione",
+                text: `La Loggia si riunisce in sessione plenaria. Tutti i membri presenti. Atmosfera elettrica.
+
+Elena presenta i risultati. Proiezioni sullo schermo: testo greco, traduzioni, grafici temporali.
+
+"Il Codex è autentico," dichiara. "Abbiamo verificato 147 profezie storiche. Accuratezza: 98,6%. Le profezie future hanno lo stesso stile, la stessa struttura. Sono attendibili."
+
+Dario si strofina le mani. "Significa che abbiamo la mappa dei prossimi 100 anni. Investimenti, mercati, guerre, tutto."
+
+Altieri alza una mano per il silenzio.
+
+"Fratelli, questo è più grande dei mercati finanziari. Abbiamo l'opportunità di guidare l'umanità. Di prevenire catastrofi. Di identificare minacce. Di... plasmare il futuro."
+
+Gli occhi gli brillano con un'intensità inquietante.`,
+                choices: [
+                    { text: "Continua", next: 31 }
+                ]
+            },
+            31: {
+                scene: "La sezione sull'Anticristo",
+                text: `Elena fa apparire sullo schermo la sezione più controversa.
+
+"<em>DE ANTICHRISTO</em>. San Giovanni ha dedicato dieci pagine a descrivere l'identità dell'Anticristo. Non simboli. Fatti."
+
+Fa scorrere le traduzioni:
+
+- Luogo di nascita: una città europea (il nome è specificato)
+- Anno di nascita: tra il 1985 e il 1995
+- Percorso: politica, carisma, falsa spiritualità
+- Ascesa al potere: tra il 2030 e il 2035
+- Regno: 7 anni di "pace falsa" seguiti da catastrofe
+
+"E il nome?" chiede qualcuno.
+
+Elena guarda Altieri, che annuisce.
+
+"Giovanni ha scritto un nome. Completo. Nome e cognome."
+
+Silenzio assoluto nella sala.
+
+Marco sente il cuore martellare. Questo è follia. Nessuno dovrebbe avere questo potere.`,
+                choices: [
+                    { text: "Continua", next: 32 }
+                ]
+            },
+            32: {
+                scene: "Il piano della Loggia",
+                text: `Altieri prende il controllo della riunione.
+
+"Fratelli, abbiamo davanti una scelta storica. Sappiamo chi è l'Anticristo. Sappiamo dove nascerà. Possiamo fermarlo prima che inizi."
+
+"Come?" chiede Dario, pratico.
+
+"Localizzazione. Monitoraggio. Intervento preventivo quando necessario."
+
+Marco si alza di scatto. "State parlando di assassinio?"
+
+Silenzio imbarazzato.
+
+Elena replica fredda: "Stiamo parlando di salvare miliardi di vite. Se uccidere Hitler bambino fosse stato possibile, non sarebbe stato giusto?"`,
+                choices: [
+                    { 
+                        text: "Avete ragione. Un sacrificio per il bene maggiore.", 
+                        next: 33, 
+                        stats: { ambizione: 3, lealtà: 2, integrità: -4 },
+                        flag: "accept_murder"
+                    },
+                    { 
+                        text: "Questo è sbagliato. Non possiamo uccidere qualcuno per ciò che potrebbe fare.", 
+                        next: 33, 
+                        stats: { integrità: 4, lealtà: -3 },
+                        flag: "reject_murder"
+                    },
+                    { 
+                        text: "C'è un'altra via. Potremmo guidarlo, educarlo diversamente.", 
+                        next: 33, 
+                        stats: { integrità: 1, ambizione: 1 },
+                        flag: "middle_way"
+                    }
+                ]
+            },
+            33: {
+                scene: "Reazione cruciale",
+                text: function(game) {
+                    if (game.lastChoice === "accept_murder") {
+                        return `Altieri sorride. "Sapevo che avresti capito, Marco. Sarai parte del team operativo."\n\nFra Giovanni si alza e lascia la sala senza dire una parola. Il suo sguardo verso Marco è di pura delusione.`;
+                    } else if (game.lastChoice === "reject_murder") {
+                        return `Tensione palpabile. Altieri si fa serio. "Marco, stai tradendo il tuo giuramento. E la tua razionalità. Ti concedo tempo per riflettere."\n\nFra Giovanni gli fa un cenno discreto: "Vieni dopo, in biblioteca."`;
+                    } else {
+                        return `Altieri considera. "Interessante. Potremmo... influenzare la sua educazione. Certo. Meno drastico ma più complesso."`;
+                    }
+                },
+                choices: [
+                    { text: "Continua", next: 34 }
+                ]
+            },
+            34: {
+                scene: "Incontro decisivo con Fra Giovanni",
+                text: function(game) {
+                    if (game.lastChoice === "accept_murder") {
+                        // Path malvagio - Giovanni è disgustato
+                        return `Fra Giovanni non ti cerca più. Nei giorni seguenti, lo vedi da lontano, ma evita il tuo sguardo.\n\nMarco ha fatto la sua scelta. La Loggia diventa la sua nuova famiglia.\n\nAltieri lo convoca nel suo ufficio per discutere l'Operazione Angelo Caduto.`;
+                    } else {
+                        // Path buono/neutrale - Giovanni rivela il segreto
+                        return `Marco trova Fra Giovanni in biblioteca. Il vecchio monaco piange silenziosamente.\n\n"Figliolo, hai visto dove porta questa strada? Non sono più ricercatori. Sono... qualcos'altro."\n\n"Giovanni, ho bisogno di sapere: c'è altro nel Codex? Qualcosa che non hanno mostrato?"\n\nGiovanni esita, poi apre un cassetto nascosto. Estrae un foglio di appunti scritti a mano.\n\n"Mio zio, l'ultimo Cavaliere di Alabastro, prima di morire copiò l'ultima pagina del Codex. Me la diede. Mai l'ho mostrata alla Loggia."\n\nPorge il foglio a Marco.`;
+                    }
+                },
+                choices: [
+                    { text: "Continua", next: 35 }
+                ]
+            },
+            35: {
+                scene: "L'ultima pagina di Giovanni",
+                text: function(game) {
+                    if (game.stats.lealtà >= 8 && game.stats.integrità <= 5) {
+                        // Path malvagio - salta alla versione malvagia
+                        return `Altieri apre un dossier. Foto di un bambino di 8 anni.\n\n"Secondo il Codex, è lui. Nato nel posto giusto, anno giusto, nome corrispondente. Tra 20 anni inizierà il suo percorso politico."\n\nMarco fissa la foto. Un bambino innocente.\n\n"Cosa... cosa faremo?"\n\n"Lo monitoreremo. E se necessario, interverremo. Per il bene di miliardi."\n\nMarco annuisce lentamente. Ha fatto la sua scelta.`;
+                    } else {
+                        // Path buono/neutrale - rivela il testamento
+                        return `Marco legge ad alta voce, voce tremante:\n\n<em>"TESTAMENTUM FINALE IOHANNIS APOSTOLI"</em>\n<em>"TESTAMENTO FINALE DELL'APOSTOLO GIOVANNI"</em>\n\n<em>"A voi che leggete queste parole cercando di controllare i tempi e le stagioni che il Padre ha riservato alla Sua potestà, io Giovanni, servo del Signore, dico:\n\nQuesto codice è una PROVA.\n\nLe profezie sono vere. Ma realizzarle o impedirle non è opera dell'uomo. È solo fede o superbia.\n\nChi userà queste parole per manipolare il futuro diventerà lo strumento stesso del Male che cerca di prevenire.\n\nL'Anticristo non è solo colui che nega Cristo con violenza. È colui che Lo tradisce credendo di servirLo.\n\nIo ho scritto questo codice come SPECCHIO: chi lo usa per potere, vi troverà la propria condanna.\n\nPrega per la tua anima."</em>`;
+                    }
+                },
+                choices: [
+                    { text: "Continua", next: 36 }
+                ]
+            },
+            36: {
+                scene: "La scelta finale",
+                text: function(game) {
+                    if (game.stats.lealtà >= 8 && game.stats.integrità <= 5) {
+                        // Path già malvagio
+                        return `Nei mesi successivi, Marco diventa il braccio destro di Altieri nel Progetto Eschaton.\n\nCoordina intelligence, hacker, esperti. Tracciano il "soggetto".\n\nMarco ha scelto il potere. Ha scelto di controllare il futuro.\n\nE non si accorge di quello che sta diventando.`;
+                    } else {
+                        // Scelta finale per path buono/neutrale
+                        return `Giovanni parla con voce rotta:\n\n"Capisci ora, figliolo? Giovanni scrisse il Codex per testare i suoi successori. Per vedere chi avrebbe avuto fede e chi avrebbe ceduto alla tentazione del controllo."\n\n"La Loggia sta fallendo il test. Altieri, Elena, Dario... stanno diventando esattamente ciò che il Codex descrive: falsi profeti che tradiscono Cristo credendo di servirLo."\n\n"E io?"\n\n"Tu hai ancora una scelta. Puoi fermarli. Ma significa tradire il tuo giuramento alla Loggia. Significa rischiare tutto."\n\nMarco guarda negli occhi il vecchio monaco.\n\nQuesta è la scelta che definirà la sua anima.`;
+                    }
+                },
+                choices: function(game) {
+                    if (game.stats.lealtà >= 8 && game.stats.integrità <= 5) {
+                        return [{ text: "Continua verso il finale", next: 44 }];
+                    } else {
+                        return [
+                            { 
+                                text: "Hai ragione. Devo fermarli. Qualunque sia il prezzo.", 
+                                next: 38, 
+                                stats: { integrità: 5, lealtà: -5 },
+                                flag: "path_good"
+                            },
+                            { 
+                                text: "Non posso. È troppo grande per me. Lascerò che Dio decida.", 
+                                next: 41, 
+                                stats: { integrità: 1 },
+                                flag: "path_neutral"
+                            },
+                            { 
+                                text: "Giovanni, sei un vecchio superstizioso. Il Codex è conoscenza, non magia.", 
+                                next: 44, 
+                                stats: { ambizione: 3, lealtà: 3, integrità: -5 },
+                                flag: "path_evil"
+                            }
+                        ];
+                    }
+                }
+            },
+            // PATH BUONO
+            38: {
+                scene: "Chiesa - La conversione",
+                text: `Fra Giovanni conduce Marco in una piccola chiesa romanica, fuori Bologna.
+
+"Prima di agire, devi purificare la tua anima, Marco. Non puoi combattere il male portando il male dentro di te."
+
+Marco si inginocchia davanti all'altare. Per la prima volta da anni—forse dalla prima comunione—prega sinceramente.
+
+Non recita formule. Parla con Dio come un figlio parla al padre che ha deluso.
+
+<em>"Signore, ho sbagliato. Ho cercato conoscenza invece di saggezza. Ho cercato potere invece di verità. Ma voglio rimediare. Dammi la forza. Mostrami la via."</em>
+
+Silenzio. Poi, lentamente, una pace che non conosceva da mesi scende su di lui.
+
+Lacrime scivolano sul suo viso. Purificazione.
+
+Fra Giovanni gli posa una mano sulla spalla.
+
+"Ora sei pronto, figliolo."`,
+                choices: [
+                    { text: "Continua", next: 39 }
+                ]
+            },
+            39: {
+                scene: "Il piano di sabotaggio",
+                text: `Giovanni svela un piano audace:
+
+"Domani sera, Altieri convoca una cerimonia speciale. Vogliono ufficializzare il Progetto Eschaton. Presenteranno le conclusioni del Codex."
+
+"Come posso fermarli?"
+
+"Le fotografie del Codex sono nel server della Loggia. Tu hai accesso ai sistemi informatici. Puoi cancellarle."
+
+"Ma Elena ha sicuramente backup!"
+
+"Per questo dovrai distruggere anche i suoi computer, fisicamente. E poi..." Giovanni esita. "Poi dovrai confessare alle autorità. Dovrai testimoniare contro la Loggia."
+
+"Significherà prigione, forse."
+
+"Forse. Ma Cristo ha dato la vita per salvare l'umanità. Tu puoi dare qualcosa per salvare molte anime."
+
+Marco trema. Ma sa che è giusto.`,
+                choices: [
+                    { 
+                        text: "Lo farò. Qualunque sia il prezzo per me.", 
+                        next: 40,
+                        flag: "heroic_ending"
+                    },
+                    { 
+                        text: "Posso distruggere i dati, ma poi devo fuggire. Non posso affrontare la prigione.", 
+                        next: 40,
+                        flag: "imperfect_ending"
+                    }
+                ]
+            },
+            40: {
+                scene: "Il sabotaggio e la resa dei conti",
+                text: function(game) {
+                    if (game.lastChoice === "heroic_ending") {
+                        return `<em>LA CERIMONIA</em>\n\nMarco entra nella sala come un fratello fedele. Quando Elena accende il proiettore, la schermata mostra: <em>FILE NON TROVATO</em>.\n\n"I file... sono stati cancellati!"\n\nAltieri si volta verso Marco, capisce. "Traditore."\n\n<em>LA FUGA</em>\n\nMarco corre verso il laboratorio di Elena. Raggiunge l'hard disk backup, lo distrugge a martellate. Dario lo raggiunge, lo colpisce. Lotta violenta. Marco scappa, sanguinante.\n\n<em>LA CONFESSIONE</em>\n\nMarco irrompe nella caserma dei Carabinieri.\n\n"Voglio denunciare un'organizzazione criminale. Loggia Lumen Mentis. Ho prove."\n\nFra Giovanni si presenta come testimone.\n\nRaid notturno. Altieri, Elena, Dario arrestati.\n\nIl Progetto Eschaton è finito.`;
+                    } else {
+                        return `Marco distrugge i file, ruba i backup, ma invece di confessare, fugge.\n\nLascia l'Italia quella notte stessa. Falso nome, aereo per la Grecia.\n\nIl Progetto Eschaton è ritardato, ma Elena aveva altri backup. Continua, più lentamente.\n\nMarco vive nascosto per anni, sapendo di non aver finito il lavoro.`;
+                    }
+                },
+                choices: [
+                    { text: "Epilogo", next: "epilogue_good" }
+                ]
+            },
+            // PATH NEUTRALE
+            41: {
+                scene: "La fuga",
+                text: `Marco non sa cosa fare. Il peso della conoscenza lo schiaccia.
+
+Non può tradire la Loggia completamente. Ma non può nemmeno permettere che usino il Codex.
+
+Sceglie la via di mezzo: fugge.
+
+Una notte, mentre la Loggia è impegnata in una riunione, Marco ruba l'hard disk con le fotografie del Codex dal laboratorio di Elena.
+
+E sparisce.`,
+                choices: [
+                    { text: "Continua", next: 42 }
+                ]
+            },
+            42: {
+                scene: "Anni di esilio",
+                text: `<em>ANNO 1 - Grecia:</em>
+Marco vive nascosto in un villaggio di montagna. L'hard disk è nascosto sotto il pavimento.
+
+<em>ANNO 3 - Balcani:</em>
+La Loggia lo ha quasi trovato. Marco fugge di nuovo. Serbia, poi Bosnia.
+
+<em>ANNO 5 - Scandinavia:</em>
+Marco ha cambiato identità tre volte. Vive in Norvegia. L'hard disk lo segue sempre. Un fardello che non ha il coraggio di distruggere, né di usare.
+
+<em>ANNO 8 - Crisi:</em>
+Marco ha 36 anni. Sembra 50. L'esilio lo consuma.
+
+Ha rallentato il piano della Loggia. Ma non lo ha fermato.
+
+E non ha salvato se stesso.`,
+                choices: [
+                    { text: "Epilogo", next: "epilogue_neutral" }
+                ]
+            },
+            // PATH MALVAGIO
+            44: {
+                scene: "L'accettazione del potere",
+                text: `Marco ha fatto la sua scelta. Fra Giovanni si sbaglia. Il Codex non è un test, è uno strumento.
+
+Incontra Altieri nel suo ufficio privato.
+
+"Marco, sono orgoglioso di te. Hai capito. Abbiamo il potere di salvare l'umanità da se stessa."
+
+"Cosa devo fare?"
+
+"Coordinare l'Operazione Angelo Caduto. Useremo il Codex per identificare l'Anticristo e neutralizzarlo prima che emerga."
+
+Altieri apre un dossier. Foto di un bambino di 8 anni.
+
+"Secondo il Codex, è lui. Tra 20 anni inizierà il suo percorso politico."
+
+Marco fissa la foto. Un bambino innocente.
+
+"Lo monitoreremo. E se necessario, interverremo. Per il bene di miliardi."`,
+                choices: [
+                    { text: "Continua", next: 45 }
+                ]
+            },
+            45: {
+                scene: "Progetto Eschaton - Fase operativa",
+                text: `<em>ANNO 1:</em>
+Marco diventa il direttore operativo del Progetto Eschaton. Budget illimitato.
+
+Tracciano il "soggetto". Lo monitorano 24/7.
+
+Elena sviluppa "protocolli di intervento": manipolazione psicologica, condizionamento.
+
+<em>ANNO 2:</em>
+Il progetto si espande. Altri "soggetti di rischio" identificati.
+
+Marco coordina tutto. Dorme 4 ore a notte.
+
+<em>ANNO 3:</em>
+Uno dei "soggetti" viene "neutralizzato". Incidente d'auto.
+
+Marco ha dato il via libera.
+
+Quella notte, per la prima volta in anni, Marco prega.
+
+"Dio, ho fatto la cosa giusta, vero?"
+
+Silenzio.`,
+                choices: [
+                    { text: "Continua", next: 46 }
+                ]
+            },
+            46: {
+                scene: "La trasformazione completa",
+                text: `<em>2028 - 10 ANNI DOPO:</em>
+
+Marco Valenti, 41 anni, è CEO della <em>Eschaton Foundation</em>, una ONG globale che "previene conflitti".
+
+In realtà, è un'organizzazione che usa il Codex per intervenire in eventi globali.
+
+Hanno "corretto" 43 "anomalie":
+- Assassinii mirati
+- Manipolazioni politiche  
+- Campagne di disinformazione
+
+Il mondo è più stabile? Forse. Meno guerre.
+
+Ma a quale prezzo?
+
+Marco vive in un attico a Milano. Ricchezza, potere, influenza.
+
+Ma è solo. Completamente solo.
+
+Una sera, riceve un pacco anonimo. L'ultima pagina del Codex. Quella di Giovanni.
+
+La rilegge. E finalmente capisce.
+
+Troppo tardi.`,
+                choices: [
+                    { text: "Epilogo", next: "epilogue_evil" }
+                ]
+            },
+            // EPILOGHI
+            "epilogue_good": {
+                scene: "Epilogo - Il Vero Tesoro",
+                text: function(game) {
+                    if (game.lastChoice === "heroic_ending") {
+                        return `<em>EPILOGO: IL VERO TESORO</em>\n\nMarco viene processato. Sei mesi di arresti domiciliari, poi assolto per collaborazione.\n\nLascia l'accademia. Si ritira in un monastero benedettino.\n\n10 anni dopo, prende i voti. Diventa Fra Marco.\n\nVive 40 anni nel monastero. Diventa maestro dei novizi.\n\nScrive un libro: "Il Prezzo della Rivelazione - Memorie di un Ex-Cercatore".\n\nMuore a 75 anni, in pace.\n\nLe sue ultime parole:\n\n<em>"Ho trovato ciò che cercavo. Non era nella reliquia. Era in me."</em>\n\n───────────\n\n<em>Il vero tesoro non è mai un oggetto.\nÈ la trasformazione dell'anima.\n\nMarco ha rinunciato al potere per trovare la libertà.\nHa perso tutto per guadagnare se stesso.\n\nE tu? Quale tesoro cerchi davvero?</em>`;
+                    } else {
+                        return `<em>EPILOGO: LA FUGA IMPERFETTA</em>\n\nMarco distrugge i file ma fugge invece di confessare.\n\nVive nascosto per 12 anni. Cambia identità, si sposta continuamente.\n\nIl Codex è ritardato ma non fermato. Elena aveva altri backup.\n\nMarco muore a 38 anni in un incidente stradale.\n\nFra Giovanni, anni dopo, contatta le autorità. Testimonia. La Loggia viene smantellata.\n\nMa Marco non vede la fine.\n\n───────────\n\n<em>Marco ha fatto la cosa giusta. Ma a metà.\n\nHa rallentato il male. Ma non lo ha fermato.\n\nA volte il bene richiede sacrificio completo.\nA volte la mezza misura non basta.\n\nHa salvato la sua vita. Ma ha perso la sua pace.\n\nE tu? Avresti avuto più coraggio?</em>`;
+                    }
+                },
+                choices: [
+                    { text: "Ricomincia la Storia", next: 0 }
+                ]
+            },
+            "epilogue_neutral": {
+                scene: "Epilogo - L'Eterno Fuggitivo",
+                text: `<em>EPILOGO: L'ETERNO FUGGITIVO</em>
+
+<em>ANNO 12:</em>
+
+Marco muore in un incidente banale. Scivola su ghiaccio in un sentiero di montagna norvegese.
+
+Quando la polizia entra nella sua baita, trova tre identità diverse. E un hard disk: "Antica Luce".
+
+Il disco viene catalogato. Finisce in un deposito statale.
+
+Cinque anni dopo, un funzionario lo trova, lo collega a un computer.
+
+Migliaia di fotografie di un manoscritto antico.
+
+Il funzionario, curioso, inizia a leggere...
+
+───────────
+
+<em>Marco ha scelto la via di mezzo. Non eroe, non villain.
+
+Ha sottratto il Codex alla Loggia. Bene.
+Ma non lo ha distrutto. Male.
+
+È vissuto 12 anni in fuga. Mai pace, mai casa.
+Il Codex lo ha posseduto tanto quanto la Loggia.
+
+E ora? Il Codex è di nuovo nel mondo.
+La storia ricomincia.
+
+Chi cerca di controllare il futuro ne diventa schiavo.
+
+Marco non ha controllato nulla. Ma non ha nemmeno avuto fede.
+Ha scelto la paura.
+
+E la paura non salva nessuno.
+
+E tu? Avresti scelto diversamente?</em>`,
+                choices: [
+                    { text: "Ricomincia la Storia", next: 0 }
+                ]
+            },
+            "epilogue_evil": {
+                scene: "Epilogo - Il Falso Profeta",
+                text: `<em>EPILOGO: IL FALSO PROFETA</em>
+
+<em>2035 - 20 ANNI DOPO:</em>
+
+Marco Valenti, 48 anni, è uno degli uomini più potenti del mondo.
+
+Il Progetto Eschaton ha "guidato" l'umanità per due decenni.
+
+<em>IL TWIST FINALE:</em>
+
+Un giorno, Marco rilegge il Codex completamente. Cerca la descrizione dell'Anticristo.
+
+E si ghiaccia.
+
+Le caratteristiche non corrispondono solo al "soggetto".
+
+Corrispondono... a lui.
+
+<em>Luogo di nascita:</em> Bologna. ✓
+<em>Anno:</em> 1987. ✓
+<em>Percorso:</em> Conoscenza proibita, manipolazione "per il bene", potere nascosto. ✓
+<em>Caratteristica chiave:</em> "Crederà di servire Dio mentre Lo tradisce." ✓
+
+Marco crolla.
+
+L'uomo che ha cercato di prevenire l'Anticristo... è diventato l'Anticristo.
+
+Giovanni aveva ragione. Il Codex era un test.
+
+E Marco lo ha fallito.
+
+───────────
+
+<em>Il vero Anticristo non è un mostro con le corna.
+È un uomo che crede di fare il bene.
+
+Marco ha cercato di controllare il futuro.
+E il futuro lo ha controllato.
+
+Giovanni lo aveva avvertito:
+"Chi usa il Codex per potere diventa parte della profezia oscura."
+
+Marco non ha ascoltato.
+
+Perché chi cerca di essere Dio... diventa demonio.
+
+E tu? Hai capito la lezione?</em>`,
+                choices: [
+                    { text: "Ricomincia la Storia", next: 0 }
+                ]
+            }
+        };
+
+        // Funzioni di gioco
+        function updateStats(choice) {
+            if (choice.stats) {
+                for (let stat in choice.stats) {
+                    game.stats[stat] += choice.stats[stat];
+                    game.stats[stat] = Math.max(0, Math.min(20, game.stats[stat]));
+                }
+            }
+            if (choice.flag) {
+                game.lastChoice = choice.flag;
+            }
+        }
+
+        function updateProgress() {
+            const progress = (game.currentPassage / game.totalPassages) * 100;
+            document.getElementById('progress-fill').style.width = progress + '%';
+        }
+
+        function showPassage(passageId) {
+            const passage = passages[passageId];
+            if (!passage) {
+                console.error('Passaggio non trovato:', passageId);
+                return;
+            }
+
+            const container = document.getElementById('game-container');
+            container.classList.remove('fade-in');
+            void container.offsetWidth; // Force reflow
+            container.classList.add('fade-in');
+
+            // Scene indicator
+            document.getElementById('scene-indicator').textContent = passage.scene || '';
+
+            // Story text
+            let text = passage.text;
+            if (typeof text === 'function') {
+                text = text(game);
+            }
+            document.getElementById('story-text').innerHTML = text.replace(/\n/g, '<br>');
+
+            // Choices
+            const choicesDiv = document.getElementById('choices');
+            choicesDiv.innerHTML = '';
+
+            let choices = passage.choices;
+            if (typeof choices === 'function') {
+                choices = choices(game);
+            }
+
+            choices.forEach(choice => {
+                const button = document.createElement('button');
+                button.className = choice.next === game.currentPassage + 1 || choice.text.includes('Continua') 
+                    ? 'continue-btn' 
+                    : 'choice-btn';
+                button.textContent = choice.text;
+                button.onclick = () => {
+                    updateStats(choice);
+                    game.currentPassage = choice.next;
+                    showPassage(choice.next);
+                    updateProgress();
+                };
+                choicesDiv.appendChild(button);
+            });
+
+            // Checkpoint notice
+            if (passage.checkpoint) {
+                const checkpoint = document.createElement('div');
+                checkpoint.className = 'checkpoint-notice';
+                checkpoint.textContent = '⚔ Checkpoint - Progresso Salvato ⚔';
+                choicesDiv.insertBefore(checkpoint, choicesDiv.firstChild);
+            }
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize game
+        showPassage(0);
+        updateProgress();
+
+        // Audio toggle (placeholder)
+        document.getElementById('audio-toggle').addEventListener('click', function() {
+            this.textContent = this.textContent === '🔇' ? '🔊' : '🔇';
+        });
+    </script>
+    <!-- Audio ambientale -->
+    <audio id="ambient-audio" loop>
+        <source src="assets/audio/ambient_medieval.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script>
+    // Gestione audio
+    const audio = document.getElementById('ambient-audio');
+    const audioToggle = document.getElementById('audio-toggle');
+    let audioPlaying = false;
+    
+    audioToggle.addEventListener('click', function() {
+        if (audioPlaying) {
+            audio.pause();
+            audioToggle.textContent = '🔇';
+            audioPlaying = false;
+        } else {
+            audio.volume = 0.3; // Volume basso
+            audio.play();
+            audioToggle.textContent = '🔊';
+            audioPlaying = true;
+        }
+    });
+    </script>
+</body>
+</html>
