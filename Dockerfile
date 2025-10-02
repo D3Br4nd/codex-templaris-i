@@ -1,14 +1,14 @@
 # Usa nginx alpine per servire contenuti statici
 FROM nginx:alpine
 
-# Copia il file HTML nella directory di default di nginx
-COPY index.html /usr/share/nginx/html/
+# Crea la directory cti
+RUN mkdir -p /usr/share/nginx/html/cti
 
-# Copia la configurazione nginx personalizzata
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copia il file HTML nella sottocartella cti
+COPY index.html /usr/share/nginx/html/cti/
 
 # Copia asset se presenti (opzionale, per quando li aggiungerai)
-# COPY assets/ /usr/share/nginx/html/assets/
+# COPY assets/ /usr/share/nginx/html/cti/assets/cti/
 
 # Esponi la porta 80
 EXPOSE 80
