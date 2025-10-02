@@ -6,7 +6,7 @@ services:
       - plv_network
     restart: unless-stopped
     labels:
-      - "app=codex-templaris"
+      - "app=codex-templaris-i"
       - "description=Narrazione interattiva CaTE 2026"
 
 networks:
