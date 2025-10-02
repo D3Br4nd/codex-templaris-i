@@ -25,7 +25,10 @@
 
         body {
             font-family: 'Crimson Text', serif;
-            background: linear-gradient(135deg, #3e2723 0%, #5d4037 100%);
+            background: 
+                linear-gradient(135deg, rgba(62, 39, 35, 0.8) 0%, rgba(93, 64, 55, 0.8) 100%),
+                url('assets/images/bg_pergamena.jpg') center/cover;
+            background-attachment: fixed;
             color: var(--ink);
             min-height: 100vh;
             display: flex;
@@ -1537,6 +1540,30 @@ E tu? Hai capito la lezione?</em>`,
         document.getElementById('audio-toggle').addEventListener('click', function() {
             this.textContent = this.textContent === '🔇' ? '🔊' : '🔇';
         });
+    </script>
+    <!-- Audio ambientale -->
+    <audio id="ambient-audio" loop>
+        <source src="assets/audio/ambient_medieval.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script>
+    // Gestione audio
+    const audio = document.getElementById('ambient-audio');
+    const audioToggle = document.getElementById('audio-toggle');
+    let audioPlaying = false;
+    
+    audioToggle.addEventListener('click', function() {
+        if (audioPlaying) {
+            audio.pause();
+            audioToggle.textContent = '🔇';
+            audioPlaying = false;
+        } else {
+            audio.volume = 0.3; // Volume basso
+            audio.play();
+            audioToggle.textContent = '🔊';
+            audioPlaying = true;
+        }
+    });
     </script>
 </body>
 </html>
