@@ -7,8 +7,8 @@ RUN mkdir -p /usr/share/nginx/html/cti
 # Copia il file HTML nella sottocartella cti
 COPY index.html /usr/share/nginx/html/cti/
 
-# Copia asset se presenti (opzionale, per quando li aggiungerai)
-# COPY assets/ /usr/share/nginx/html/cti/assets/cti/
+# Copia gli asset nella sottocartella cti
+COPY assets/ /usr/share/nginx/html/cti/assets/
 
 # Esponi la porta 80
 EXPOSE 80
