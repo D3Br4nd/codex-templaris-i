@@ -663,7 +663,7 @@ Ci sono nomi. Luoghi di nascita. Percorsi politici. Come se Giovanni avesse vist
 **Scene:** Mattina, aeroporto
 
 **Testo:**
-Partono all'alba. Il Codex originale resta nel monastero—impossibile rubarlo senza causare un incidente internazionale. Ma Elena ha le fotografie. Ogni pagina. Ogni parola.
+Partono all'alba. Il Codex originale resta nel monaster, impossibile rubarlo senza causare un incidente internazionale. Ma Elena ha le fotografie. Ogni pagina. Ogni parola.
 
 Padre Nikodimos li saluta all'uscita. Il suo sguardo si sofferma su Marco.
 
